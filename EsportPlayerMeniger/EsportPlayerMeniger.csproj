@@ -28,4 +28,10 @@
         <PackageReference Include="Npgsql" Version="9.0.3" />
         <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="Views\PlayersView.axml.cs">
+        <DependentUpon>PlayersView.axml</DependentUpon>
+      </Compile>
+    </ItemGroup>
 </Project>

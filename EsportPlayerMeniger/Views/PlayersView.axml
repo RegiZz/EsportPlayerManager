@@ -1,0 +1,102 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:EsportPlayerMeniger.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="EsportPlayerMeniger.Views.PlayersView"
+             x:DataType="vm:PlayerViewModel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://github.com/avaloniaui ">
+
+    <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="2*,*">
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="10">
+            <TextBlock Text="Gracze Esportowi" FontSize="24" FontWeight="Bold" Margin="0,0,20,0"/>
+            <Button Content="Dodaj Gracza" Command="{Binding ShowAddPlayerDialogCommand}"/>
+        </StackPanel>
+
+        <!-- Players List -->
+        <DataGrid Grid.Row="1" Grid.Column="0"
+                  ItemsSource="{Binding Players}"
+                  SelectedItem="{Binding SelectedPlayer}"
+                  Margin="10"
+                  AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nickname" Binding="{Binding Nickname}" Width="*"/>
+                <DataGridTextColumn Header="Gra" Binding="{Binding Game}" Width="*"/>
+                <DataGridTextColumn Header="Skill" Binding="{Binding SkillLevel}" Width="60"/>
+                <DataGridTextColumn Header="Zmęczenie" Binding="{Binding FatigueLevel}" Width="80">
+                    <DataGridTextColumn.CellStyleClasses>
+                        <Binding Path="FatigueLevel" Converter="{x:Static vm:FatigueColorConverter.Instance}"/>
+                    </DataGridTextColumn.CellStyleClasses>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Stres" Binding="{Binding StressLevel}" Width="60">
+                    <DataGridTextColumn.CellStyleClasses>
+                        <Binding Path="StressLevel" Converter="{x:Static vm:StressColorConverter.Instance}"/>
+                    </DataGridTextColumn.CellStyleClasses>
+                </DataGridTextColumn>
+                <DataGridTextColumn Header="Punkty" Binding="{Binding RankingPoints}" Width="80"/>
+                <DataGridTextColumn Header="Pieniądze" Binding="{Binding Money, StringFormat=C}" Width="100"/>
+                <DataGridTemplateColumn Header="Akcje" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Spacing="5">
+                                <Button Content="Odpoczynek"
+                                        Command="{Binding $parent[UserControl].((vm:PlayerViewModel)DataContext).RestPlayerCommand}"
+                                        CommandParameter="{Binding}"
+                                        FontSize="10"/>
+                                <Button Content="Usuń"
+                                        Command="{Binding $parent[UserControl].((vm:PlayerViewModel)DataContext).DeletePlayerCommand}"
+                                        CommandParameter="{Binding}"
+                                        FontSize="10"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Leaderboard -->
+        <Border Grid.Row="1" Grid.Column="1" Background="LightBlue" Margin="10" Padding="10">
+            <StackPanel>
+                <TextBlock Text="🏆 Ranking" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"
+                           Margin="0,0,0,10"/>
+                <ListBox ItemsSource="{Binding Leaderboard}">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Nickname}" FontWeight="Bold" Width="100"/>
+                                <TextBlock Text="{Binding RankingPoints}" Margin="10,0"/>
+                                <TextBlock Text="pkt"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+        </Border>
+
+        <!-- Add Player Dialog -->
+        <Border Grid.Row="0" Grid.RowSpan="3" Grid.ColumnSpan="2"
+                Background="#80000000"
+                IsVisible="{Binding IsAddingPlayer}"
+                ZIndex="100">
+            <Border Background="White"
+                    Width="300"
+                    Height="200"
+                    CornerRadius="10"
+                    Padding="20">
+                <StackPanel Spacing="10">
+                    <TextBlock Text="Dodaj Nowego Gracza" FontSize="16" FontWeight="Bold"/>
+                    <TextBox Text="{Binding NewPlayerNickname}" Watermark="Nickname"/>
+                    <TextBox Text="{Binding NewPlayerGame}" Watermark="Gra (np. CS2, LoL)"/>
+                    <StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Right">
+                        <Button Content="Anuluj" Command="{Binding CancelAddPlayerCommand}"/>
+                        <Button Content="Dodaj" Command="{Binding AddPlayerCommand}"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Border>
+
+    </Grid>
+</UserControl>
