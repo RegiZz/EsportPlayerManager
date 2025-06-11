@@ -21,25 +21,15 @@ public partial class MainWindowViewModel : ViewModelBase
         PlayerViewModel = new PlayerViewModel(playerService);
         TournamentViewModel = new TournamentViewModel(tournamentService, playerService);
         TrainingViewModel = new TrainingViewModel(trainingService, playerService);
-        
         currentView = PlayerViewModel;
     }
 
     [RelayCommand]
-    private void ShowPlayers()
-    {
-        CurrentView = PlayerViewModel;
-    }
+    private void ShowPlayers() => CurrentView = PlayerViewModel;
 
     [RelayCommand]
-    private void ShowTournaments()
-    {
-        CurrentView = TournamentViewModel;
-    }
+    private void ShowTournaments() => CurrentView = TournamentViewModel;
 
     [RelayCommand]
-    private void ShowTraining()
-    {
-        CurrentView = TrainingViewModel;
-    }
+    private void ShowTraining() => CurrentView = TrainingViewModel;
 }

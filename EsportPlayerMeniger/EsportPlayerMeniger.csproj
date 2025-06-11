@@ -30,7 +30,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Views\PlayersView.axml.cs">
+      <Compile Update="Views\PlayersView.axaml.cs">
         <DependentUpon>PlayersView.axml</DependentUpon>
       </Compile>
     </ItemGroup>

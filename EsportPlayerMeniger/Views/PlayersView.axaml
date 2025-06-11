@@ -1,15 +1,14 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui" 
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:EsportPlayerMeniger.ViewModels"
+             xmlns:dataGrids="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EsportPlayerMeniger.Views.PlayersView"
-             x:DataType="vm:PlayerViewModel" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="https://github.com/avaloniaui ">
+             x:DataType="vm:PlayerViewModel">
 
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="2*,*">
-
         <!-- Header -->
         <StackPanel Grid.Row="0" Grid.ColumnSpan="2" Orientation="Horizontal" Margin="10">
             <TextBlock Text="Gracze Esportowi" FontSize="24" FontWeight="Bold" Margin="0,0,20,0"/>
@@ -28,12 +27,12 @@
                 <DataGridTextColumn Header="Skill" Binding="{Binding SkillLevel}" Width="60"/>
                 <DataGridTextColumn Header="Zmęczenie" Binding="{Binding FatigueLevel}" Width="80">
                     <DataGridTextColumn.CellStyleClasses>
-                        <Binding Path="FatigueLevel" Converter="{x:Static vm:FatigueColorConverter.Instance}"/>
+                        <Binding Path="FatigueLevel" Converter="{x:Static converters:FatigueColorConverter.Instance}"/>
                     </DataGridTextColumn.CellStyleClasses>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Stres" Binding="{Binding StressLevel}" Width="60">
                     <DataGridTextColumn.CellStyleClasses>
-                        <Binding Path="StressLevel" Converter="{x:Static vm:StressColorConverter.Instance}"/>
+                        <Binding Path="StressLevel" Converter="{x:Static converters:StressColorConverter.Instance}"/>
                     </DataGridTextColumn.CellStyleClasses>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Punkty" Binding="{Binding RankingPoints}" Width="80"/>
@@ -43,6 +42,8 @@
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal" Spacing="5">
                                 <Button Content="Odpoczynek"
+                                        AutomationProperties.Name="Rozpocznij odpoczynek gracza"
+                                        AutomationProperties.HelpText="Kliknij aby dać graczowi czas na odpoczynek"
                                         Command="{Binding $parent[UserControl].((vm:PlayerViewModel)DataContext).RestPlayerCommand}"
                                         CommandParameter="{Binding}"
                                         FontSize="10"/>
@@ -97,6 +98,5 @@
                 </StackPanel>
             </Border>
         </Border>
-
     </Grid>
 </UserControl>

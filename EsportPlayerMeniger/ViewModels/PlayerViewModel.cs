@@ -14,24 +14,22 @@ public partial class PlayerViewModel : ViewModelBase
     private readonly IPlayerService _playerService;
 
     [ObservableProperty]
-    private ObservableCollection<Player> players = new();
+    private ObservableCollection<Player> _players = new();
 
     [ObservableProperty]
-    private ObservableCollection<Player> leaderboard = new();
+    private ObservableCollection<Player> _leaderboard = new();
 
     [ObservableProperty]
-    private Player? selectedPlayer;
+    private Player? _selectedPlayer;
 
     [ObservableProperty]
-    [Required]
-    private string newPlayerNickname = string.Empty;
+    private string _newPlayerNickname = string.Empty;
 
     [ObservableProperty]
-    [Required]
-    private string newPlayerGame = string.Empty;
+    private string _newPlayerGame = string.Empty;
 
     [ObservableProperty]
-    private bool isAddingPlayer;
+    private bool _isAddingPlayer;
 
     public PlayerViewModel(IPlayerService playerService)
     {

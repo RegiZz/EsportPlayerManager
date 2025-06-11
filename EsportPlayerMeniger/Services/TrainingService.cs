@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using EsportPlayerMeniger.Data;
 using EsportPlayerMeniger.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace EsportPlayerMeniger.Services;
 
@@ -18,15 +18,11 @@ public class TrainingService : ITrainingService
         _playerService = playerService;
     }
 
-    public async Task<List<Training>> GetAllTrainingsAsync()
-    {
-        return await _context.Trainings.ToListAsync();
-    }
+    public async Task<List<Training>> GetAllTrainingsAsync() =>
+        await _context.Trainings.ToListAsync();
 
-    public async Task<Training?> GetTrainingByIdAsync(int id)
-    {
-        return await _context.Trainings.FindAsync(id);
-    }
+    public async Task<Training?> GetTrainingByIdAsync(int id) =>
+        await _context.Trainings.FindAsync(id);
 
     public async Task AddTrainingAsync(Training training)
     {
@@ -34,16 +30,13 @@ public class TrainingService : ITrainingService
         await _context.SaveChangesAsync();
     }
 
-    public Task<bool> CanPlayerTrain(Player player)
-    {
-        return Task.FromResult(player.FatigueLevel < 80);
-    }
+    public Task<bool> CanPlayerTrain(Player player) =>
+        Task.FromResult(player.FatigueLevel < 80);
 
     public async Task TrainPlayer(Player player, Training training)
     {
         player.SkillLevel = Math.Min(100, player.SkillLevel + training.SkillIncrease);
         player.FatigueLevel = Math.Min(100, player.FatigueLevel + training.FatigueIncrease);
-        
         await _playerService.UpdatePlayerAsync(player);
     }
 }

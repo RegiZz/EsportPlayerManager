@@ -2,7 +2,7 @@
 using Dapper;
 using Npgsql;
 
-namespace GranieManager.Repository;
+namespace EsportPlayerMeniger.Repository;
 
 public class DatabaseRepository
 {

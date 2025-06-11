@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using EsportPlayerMeniger.Data;
+using EsportPlayerMeniger.Models;
+using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using EsportPlayerMeniger.Data;
 using EsportPlayerMeniger.Models;
-using Microsoft.EntityFrameworkCore;
+using EsportPlayerMeniger.Services;
 
 namespace EsportPlayerMeniger.Services;
 
@@ -11,20 +14,13 @@ public class PlayerService : IPlayerService
 {
     private readonly AppDbContext _context;
 
-    public PlayerService(AppDbContext context)
-    {
-        _context = context;
-    }
+    public PlayerService(AppDbContext context) => _context = context;
 
-    public async Task<List<Player>> GetAllPlayersAsync()
-    {
-        return await _context.Players.ToListAsync();
-    }
+    public async Task<List<Player>> GetAllPlayersAsync() =>
+        await _context.Players.ToListAsync();
 
-    public async Task<Player?> GetPlayerByIdAsync(int id)
-    {
-        return await _context.Players.FindAsync(id);
-    }
+    public async Task<Player?> GetPlayerByIdAsync(int id) =>
+        await _context.Players.FindAsync(id);
 
     public async Task AddPlayerAsync(Player player)
     {
@@ -48,11 +44,9 @@ public class PlayerService : IPlayerService
         }
     }
 
-    public async Task<List<Player>> GetLeaderboardAsync()
-    {
-        return await _context.Players
+    public async Task<List<Player>> GetLeaderboardAsync() =>
+        await _context.Players
             .OrderByDescending(p => p.RankingPoints)
             .Take(10)
             .ToListAsync();
-    }
 }
