@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AvaloniaProject">
+    <option name="projectPerEditor">
+      <map>
+        <entry key="EsportPlayerMeniger/App.axaml" value="EsportPlayerMeniger/EsportPlayerMeniger.csproj" />
+        <entry key="EsportPlayerMeniger/Views/MainWindow.axaml" value="EsportPlayerMeniger/EsportPlayerMeniger.csproj" />
+        <entry key="EsportPlayerMeniger/Views/PlayersView.axaml" value="EsportPlayerMeniger/EsportPlayerMeniger.csproj" />
+        <entry key="EsportPlayerMeniger/Views/SkbidiView.axaml" value="EsportPlayerMeniger/EsportPlayerMeniger.csproj" />
+      </map>
+    </option>
+  </component>
+</project>

@@ -3,7 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:EsportPlayerMeniger.ViewModels"
-             xmlns:dataGrids="clr-namespace:Avalonia.Controls;assembly=Avalonia.Controls.DataGrid"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EsportPlayerMeniger.Views.PlayersView"
              x:DataType="vm:PlayerViewModel">
@@ -27,12 +26,12 @@
                 <DataGridTextColumn Header="Skill" Binding="{Binding SkillLevel}" Width="60"/>
                 <DataGridTextColumn Header="Zmęczenie" Binding="{Binding FatigueLevel}" Width="80">
                     <DataGridTextColumn.CellStyleClasses>
-                        <Binding Path="FatigueLevel" Converter="{x:Static converters:FatigueColorConverter.Instance}"/>
+                        <Binding Path="FatigueLevel"/>
                     </DataGridTextColumn.CellStyleClasses>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Stres" Binding="{Binding StressLevel}" Width="60">
                     <DataGridTextColumn.CellStyleClasses>
-                        <Binding Path="StressLevel" Converter="{x:Static converters:StressColorConverter.Instance}"/>
+                        <Binding Path="StressLevel"/>
                     </DataGridTextColumn.CellStyleClasses>
                 </DataGridTextColumn>
                 <DataGridTextColumn Header="Punkty" Binding="{Binding RankingPoints}" Width="80"/>
