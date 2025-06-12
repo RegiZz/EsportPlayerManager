@@ -11,6 +11,6 @@ public class AppDbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
-        options.UseNpgsql("Host=localhost;Database=esport;Username=postgres;Password=yourpassword");
+        options.UseNpgsql("Host=localhost;Database=esport;Username=postgres;Password=password123");
     }
 }

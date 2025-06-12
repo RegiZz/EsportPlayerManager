@@ -2,9 +2,9 @@
 
 namespace EsportPlayerMeniger.Views;
 
-public partial class PlayersView : UserControl
+public partial class PlayerView : UserControl
 {
-    public PlayersView()
+    public PlayerView()
     {
         InitializeComponent();
     }

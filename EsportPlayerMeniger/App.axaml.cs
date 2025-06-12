@@ -4,6 +4,7 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using System.Linq;
 using Avalonia.Markup.Xaml;
+using EsportPlayerMeniger.Services;
 using EsportPlayerMeniger.ViewModels;
 using EsportPlayerMeniger.Views;
 
@@ -11,9 +12,11 @@ namespace EsportPlayerMeniger;
 
 public partial class App : Application
 {
+    
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        
     }
 
     public override void OnFrameworkInitializationCompleted()
