@@ -3,6 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:EsportPlayerMeniger.ViewModels"
+             xmlns:local="using:EsportPlayerMeniger.Converters"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="EsportPlayerMeniger.Views.PlayersView"
              x:DataType="vm:PlayerViewModel">
@@ -24,16 +25,39 @@
                 <DataGridTextColumn Header="Nickname" Binding="{Binding Nickname}" Width="*"/>
                 <DataGridTextColumn Header="Gra" Binding="{Binding Game}" Width="*"/>
                 <DataGridTextColumn Header="Skill" Binding="{Binding SkillLevel}" Width="60"/>
-                <DataGridTextColumn Header="Zmęczenie" Binding="{Binding FatigueLevel}" Width="80">
-                    <DataGridTextColumn.CellStyleClasses>
-                        <Binding Path="FatigueLevel"/>
-                    </DataGridTextColumn.CellStyleClasses>
-                </DataGridTextColumn>
-                <DataGridTextColumn Header="Stres" Binding="{Binding StressLevel}" Width="60">
-                    <DataGridTextColumn.CellStyleClasses>
-                        <Binding Path="StressLevel"/>
-                    </DataGridTextColumn.CellStyleClasses>
-                </DataGridTextColumn>
+                <DataGridTemplateColumn Header="Zmęczenie" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding FatigueLevel}" 
+                                       HorizontalAlignment="Center"
+                                       Padding="5">
+                                <TextBlock.Background>
+                                    <SolidColorBrush Color="{Binding FatigueLevel, Converter={x:Static local:FatigueToColorConverter.Instance}}"/>
+                                </TextBlock.Background>
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{Binding FatigueLevel, Converter={x:Static local:FatigueToTextColorConverter.Instance}}"/>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="Stres" Width="60">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StressLevel}" 
+                                       HorizontalAlignment="Center"
+                                       Padding="5">
+                                <TextBlock.Background>
+                                    <SolidColorBrush Color="{Binding StressLevel, Converter={x:Static local:StressToColorConverter.Instance}}"/>
+                                </TextBlock.Background>
+                                <TextBlock.Foreground>
+                                    <SolidColorBrush Color="{Binding StressLevel, Converter={x:Static local:StressToTextColorConverter.Instance}}"/>
+                                </TextBlock.Foreground>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Punkty" Binding="{Binding RankingPoints}" Width="80"/>
                 <DataGridTextColumn Header="Pieniądze" Binding="{Binding Money, StringFormat=C}" Width="100"/>
                 <DataGridTemplateColumn Header="Akcje" Width="150">
