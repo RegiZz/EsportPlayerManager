@@ -29,6 +29,20 @@ public partial class TournamentViewModel : ViewModelBase
 
     [ObservableProperty]
     private bool canJoinTournament;
+    
+    [ObservableProperty]
+    private string newTournamentName = string.Empty;
+
+    [ObservableProperty]
+    private int newTournamentMinSkill;
+
+    [ObservableProperty]
+    private decimal newTournamentEntryFee;
+
+    [ObservableProperty]
+    private decimal newTournamentPrizePool;
+    
+    
 
     public TournamentViewModel(ITournamentService tournamentService, IPlayerService playerService)
     {
@@ -37,15 +51,8 @@ public partial class TournamentViewModel : ViewModelBase
         LoadDataAsync();
     }
 
-    partial void OnSelectedTournamentChanged(Tournament? value)
-    {
-        CheckCanJoinTournament();
-    }
-
-    partial void OnSelectedPlayerChanged(Player? value)
-    {
-        CheckCanJoinTournament();
-    }
+    partial void OnSelectedTournamentChanged(Tournament? value) => CheckCanJoinTournament();
+    partial void OnSelectedPlayerChanged(Player? value) => CheckCanJoinTournament();
 
     private async void CheckCanJoinTournament()
     {
@@ -88,7 +95,39 @@ public partial class TournamentViewModel : ViewModelBase
         var result = await _tournamentService.PlayTournament(SelectedPlayer, SelectedTournament);
         TournamentResult = result.Message;
 
-        // Odświeżamy dane gracza
-        await LoadDataAsync();
+        await LoadDataAsync(); // Odśwież dane gracza po turnieju
+    }
+
+    // Dodawanie turnieju
+    [RelayCommand]
+    private async Task AddNewTournamentAsync()
+    {
+        if (string.IsNullOrWhiteSpace(NewTournamentName) ||
+            NewTournamentMinSkill < 0 ||
+            NewTournamentEntryFee < 0 ||
+            NewTournamentPrizePool < 0)
+        {
+            TournamentResult = "Wypełnij wszystkie pola poprawnie.";
+            return;
+        }
+
+        var tournament = new Tournament
+        {
+            Name = NewTournamentName,
+            MinSkillRequired = NewTournamentMinSkill,
+            EntryFee = NewTournamentEntryFee,
+            PrizePool = NewTournamentPrizePool
+        };
+
+        await _tournamentService.AddTournamentAsync(tournament);
+
+        TournamentResult = $"✅ Turniej '{tournament.Name}' został dodany!";
+        await LoadDataAsync(); // Odśwież listę turniejów
+
+        // Wyczyść pola formularza
+        NewTournamentName = string.Empty;
+        NewTournamentMinSkill = 0;
+        NewTournamentEntryFee = 0;
+        NewTournamentPrizePool = 0;
     }
 }

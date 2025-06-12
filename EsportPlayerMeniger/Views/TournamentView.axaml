@@ -1,29 +1,54 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"    
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:EsportPlayerMeniger.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" 
+             d:DesignWidth="900" 
+             d:DesignHeight="600"
              x:Class="EsportPlayerMeniger.Views.TournamentView"
              x:DataType="vm:TournamentViewModel">
 
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,*">
         <!-- Header -->
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Turnieje" FontSize="24" FontWeight="Bold" Margin="10"/>
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#2C3E50" Padding="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Text="🏆 Turnieje" FontSize="28" FontWeight="Bold" Foreground="#F8F9F9"/>
+            </StackPanel>
+        </Border>
 
         <!-- Tournaments List -->
-        <Border Grid.Row="1" Grid.Column="0" Margin="10" Padding="10" Background="LightGray">
+        <Border Grid.Row="1" Grid.Column="0" Margin="20" Padding="15" Background="DimGray" CornerRadius="8">
             <StackPanel>
-                <TextBlock Text="Dostępne Turnieje" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-                <ListBox ItemsSource="{Binding Tournaments}" SelectedItem="{Binding SelectedTournament}">
+                <TextBlock Text="🎯 Dostępne Turnieje" 
+                           FontSize="18" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,10" 
+                           Foreground="#F8F9F9"/>
+
+                <!-- ListBox z obsługą selekcji i scrollowaniem -->
+                <ListBox ItemsSource="{Binding Tournaments}" 
+                         SelectedItem="{Binding SelectedTournament}"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         Padding="0"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         Height="200">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="5">
-                                <TextBlock Text="{Binding Name}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding EntryFee, StringFormat='Wpisowe: {0:C}'}"/>
-                                <TextBlock Text="{Binding PrizePool, StringFormat='Pula nagród: {0:C}'}"/>
-                                <TextBlock Text="{Binding MinSkillRequired, StringFormat='Min. skill: {0}'}"/>
-                            </StackPanel>
+                            <Border BorderBrush="#DDE0E4" 
+                                    BorderThickness="1" 
+                                    Padding="10" 
+                                    Margin="0,5" 
+                                    CornerRadius="6"
+                                    Background="DimGray">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="#F8F9F9"/>
+                                    <TextBlock Text="{Binding EntryFee, StringFormat='Wpisowe: {0:C}'}" Foreground="#F8F9F9"/>
+                                    <TextBlock Text="{Binding PrizePool, StringFormat='Pula nagród: {0:C}'}" Foreground="#F8F9F9"/>
+                                    <TextBlock Text="{Binding MinSkillRequired, StringFormat='Min. skill: {0}'}" Foreground="#F8F9F9"/>
+                                </StackPanel>
+                            </Border>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -31,35 +56,83 @@
         </Border>
 
         <!-- Players List -->
-        <Border Grid.Row="1" Grid.Column="1" Margin="10" Padding="10" Background="LightBlue">
+        <Border Grid.Row="1" Grid.Column="1" Margin="20" Padding="15" Background="DimGray" CornerRadius="8">
             <StackPanel>
-                <TextBlock Text="Wybierz Gracza" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-                <ListBox ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer}">
+                <TextBlock Text="🧑‍💻 Wybierz Gracza" 
+                           FontSize="18" 
+                           FontWeight="Bold" 
+                           Margin="0,0,0,10" 
+                           Foreground="#F8F9F9"/>
+
+                <!-- ListBox z obsługą selekcji i scrollowaniem -->
+                <ListBox ItemsSource="{Binding Players}" 
+                         SelectedItem="{Binding SelectedPlayer}"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         Padding="0"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         Height="200">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="5">
-                                <TextBlock Text="{Binding Nickname}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding SkillLevel, StringFormat='Skill: {0}'}"/>
-                                <TextBlock Text="{Binding Money, StringFormat='Pieniądze: {0:C}'}"/>
-                                <TextBlock Text="{Binding FatigueLevel, StringFormat='Zmęczenie: {0}'}"/>
-                            </StackPanel>
+                            <Border BorderBrush="#DDE0E4" 
+                                    BorderThickness="1" 
+                                    Padding="10" 
+                                    Margin="0,5" 
+                                    CornerRadius="6"
+                                    Background="White">
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Nickname}" FontWeight="Bold" Foreground="Black"/>
+                                    <TextBlock Text="{Binding SkillLevel, StringFormat='Skill: {0}'}" Foreground="Black"/>
+                                    <TextBlock Text="{Binding Money, StringFormat='Pieniądze: {0:C}'}" Foreground="Black"/>
+                                    <TextBlock Text="{Binding FatigueLevel, StringFormat='Zmęczenie: {0}'}" Foreground="Black"/>
+                                </StackPanel>
+                            </Border>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </StackPanel>
         </Border>
 
-        <!-- Actions -->
-        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-            <Button Content="Dołącz do Turnieju" 
-                    Command="{Binding JoinTournamentCommand}"
-                    IsEnabled="{Binding CanJoinTournament}"
-                    Padding="20,10"
-                    Margin="0,0,10,0"/>
-            <TextBlock Text="{Binding TournamentResult}" 
-                       VerticalAlignment="Center"
-                       FontWeight="Bold"
-                       Foreground="Green"/>
-        </StackPanel>
+        <!-- Add New Tournament Form + Actions -->
+        <Border Grid.Row="2" Grid.ColumnSpan="2" Margin="20" Padding="15" Background="DimGray" CornerRadius="8">
+            <Grid ColumnDefinitions="*,*">
+                <StackPanel Grid.Column="0">
+                    <TextBlock Text="➕ Dodaj Nowy Turniej" 
+                               FontSize="18" 
+                               FontWeight="Bold" 
+                               Foreground="#F8F9F9"
+                               Margin="0,0,0,10"/>
+                    <TextBox Text="{Binding NewTournamentName}" Watermark="Nazwa turnieju"/>
+                    <TextBox Text="{Binding NewTournamentMinSkill}" Watermark="Minimalny skill (np. 50)"/>
+                    <TextBox Text="{Binding NewTournamentEntryFee}" Watermark="Wpisowe (np. 100)"/>
+                    <TextBox Text="{Binding NewTournamentPrizePool}" Watermark="Pula nagród (np. 1000)"/>
+                    <Button Content="💾 Zapisz Turniej"
+                            Command="{Binding AddNewTournamentCommand}"
+                            Background="#3498DB"
+                            Foreground="White"
+                            Padding="10,5"
+                            HorizontalAlignment="Left"
+                            Width="150"
+                            Margin="0,10,0,0"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <Button Content="🎮 Dołącz do Turnieju"
+                            Command="{Binding JoinTournamentCommand}"
+                            IsEnabled="{Binding CanJoinTournament}"
+                            Background="#2ECC71"
+                            Foreground="#F8F9F9"
+                            Padding="20,10"
+                            Margin="0,0,10,0"/>
+                    <Border Background="White" Padding="10" CornerRadius="6" BorderBrush="#DDE0E4" BorderThickness="1">
+                        <TextBlock Text="{Binding TournamentResult}" 
+                                   VerticalAlignment="Center"
+                                   FontWeight="Bold"
+                                   Foreground="Green"
+                                   FontSize="18"/>
+                        </Border>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </UserControl>

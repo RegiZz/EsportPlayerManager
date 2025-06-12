@@ -33,6 +33,11 @@ public class PlayerService : IPlayerService
         _context.Players.Update(player);
         await _context.SaveChangesAsync();
     }
+    public async Task DeletePlayerAsync(Player player)
+    {
+        _context.Players.Remove(player);
+        await _context.SaveChangesAsync();
+    }
 
     public async Task DeletePlayerAsync(int id)
     {

@@ -1,28 +1,66 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"    
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:EsportPlayerMeniger.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" 
+             d:DesignWidth="900" 
+             d:DesignHeight="600"
              x:Class="EsportPlayerMeniger.Views.TrainingView"
              x:DataType="vm:TrainingViewModel">
 
     <Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="*,*">
         <!-- Header -->
-        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Treningi" FontSize="24" FontWeight="Bold" Margin="10"/>
+        <Border Grid.Row="0" Grid.ColumnSpan="2" Background="#2C3E50" Padding="10">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                <TextBlock Text="🥋 Treningi" FontSize="28" FontWeight="Bold" Foreground="White"/>
+            </StackPanel>
+        </Border>
 
         <!-- Training List -->
-        <Border Grid.Row="1" Grid.Column="0" Margin="10" Padding="10" Background="LightYellow">
+        <Border Grid.Row="1" Grid.Column="0" Margin="20" Padding="15" Background="#FFF9E6" CornerRadius="8">
             <StackPanel>
-                <TextBlock Text="Dostępne Treningi" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-                <ListBox ItemsSource="{Binding Trainings}" SelectedItem="{Binding SelectedTraining}">
+                <TextBlock Text="💪 Dostępne Treningi" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                <!-- ListBox z obsługą scrollowania i przyciskiem usuń -->
+                <ListBox ItemsSource="{Binding Trainings}" 
+                         SelectedItem="{Binding SelectedTraining}"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         Height="200">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="5">
-                                <TextBlock Text="{Binding Type}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding SkillIncrease, StringFormat='Wzrost skill: +{0}'}"/>
-                                <TextBlock Text="{Binding FatigueIncrease, StringFormat='Zmęczenie: +{0}'}"/>
-                            </StackPanel>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <!-- Dane treningu -->
+                                <Border Grid.Column="0"
+                                        BorderBrush="#F1D9A7" 
+                                        BorderThickness="1" 
+                                        Padding="10" 
+                                        Margin="0,5" 
+                                        CornerRadius="6"
+                                        Background="White">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Type}" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding SkillIncrease, StringFormat='Wzrost skill: +{0}'}"/>
+                                        <TextBlock Text="{Binding FatigueIncrease, StringFormat='Zmęczenie: +{0}'}"/>
+                                        <TextBlock Text="{Binding StressIncrease, StringFormat='Stres: +{0}'}"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Przycisk Usuń -->
+                                <Button Grid.Column="1"
+                                        Content="🗑️"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Background="Red"
+                                        Foreground="White"
+                                        Width="30"
+                                        Height="30"
+                                        ToolTip.Tip="Usuń ten trening"/>
+                                        <!-- Command="{Binding DeleteTrainingCommand}" -->
+                                        <!-- CommandParameter="{Binding}" -->
+                            </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -30,17 +68,47 @@
         </Border>
 
         <!-- Players List -->
-        <Border Grid.Row="1" Grid.Column="1" Margin="10" Padding="10" Background="LightGreen">
+        <Border Grid.Row="1" Grid.Column="1" Margin="20" Padding="15" Background="#E6F9EC" CornerRadius="8">
             <StackPanel>
-                <TextBlock Text="Wybierz Gracza" FontSize="16" FontWeight="Bold" Margin="0,0,0,10"/>
-                <ListBox ItemsSource="{Binding Players}" SelectedItem="{Binding SelectedPlayer}">
+                <TextBlock Text="🧑‍💻 Wybierz Gracza" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
+
+                <ListBox ItemsSource="{Binding Players}" 
+                         SelectedItem="{Binding SelectedPlayer}"
+                         BorderThickness="0"
+                         Background="Transparent"
+                         ScrollViewer.VerticalScrollBarVisibility="Auto"
+                         Height="200">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <StackPanel Margin="5">
-                                <TextBlock Text="{Binding Nickname}" FontWeight="Bold"/>
-                                <TextBlock Text="{Binding SkillLevel, StringFormat='Skill: {0}'}"/>
-                                <TextBlock Text="{Binding FatigueLevel, StringFormat='Zmęczenie: {0}'}"/>
-                            </StackPanel>
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Border Grid.Column="0"
+                                        BorderBrush="#B3F2DC" 
+                                        BorderThickness="1" 
+                                        Padding="10" 
+                                        Margin="0,5" 
+                                        CornerRadius="6"
+                                        Background="White">
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Nickname}" FontWeight="Bold"/>
+                                        <TextBlock Text="{Binding SkillLevel, StringFormat='Skill: {0}'}"/>
+                                        <TextBlock Text="{Binding Money, StringFormat='Pieniądze: {0:C}'}"/>
+                                        <TextBlock Text="{Binding FatigueLevel, StringFormat='Zmęczenie: {0}'}"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <!-- Przycisk Usuń Gracza -->
+                                <Button Grid.Column="1"
+                                        Content="🗑️"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Background="Red"
+                                        Foreground="White"
+                                        Width="30"
+                                        Height="30"
+                                        ToolTip.Tip="Usuń gracza"/>
+                                        <!-- Command="{Binding DeletePlayerCommand}" -->
+                                        <!-- CommandParameter="{Binding}" -->
+                            </Grid>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
@@ -49,14 +117,22 @@
 
         <!-- Actions -->
         <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Vertical" HorizontalAlignment="Center" Margin="10">
-            <TextBlock Text="{Binding TrainingMessage}" 
-                       HorizontalAlignment="Center"
-                       FontWeight="Bold"
-                       Margin="0,0,0,10"/>
-            <Button Content="Rozpocznij Trening" 
+            <Border Background="White" Padding="10" CornerRadius="6" BorderBrush="#DDE0E4" BorderThickness="1">
+                <TextBlock Text="{Binding TrainingMessage}" 
+                           HorizontalAlignment="Center"
+                           FontWeight="Bold"
+                           Foreground="Green"
+                           FontSize="18"/>
+            </Border>
+
+            <Button Content="🏋️ Rozpocznij Trening"
                     Command="{Binding TrainPlayerCommand}"
                     IsEnabled="{Binding CanTrain}"
-                    Padding="20,10"/>
+                    Background="#2ECC71"
+                    Foreground="White"
+                    Padding="20,10"
+                    HorizontalAlignment="Center"
+                    Margin="0,10,0,0"/>
         </StackPanel>
     </Grid>
 </UserControl>

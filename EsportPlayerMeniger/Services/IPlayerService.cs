@@ -13,4 +13,5 @@ public interface IPlayerService
     Task UpdatePlayerAsync(Player player);
     Task DeletePlayerAsync(int id);
     Task<List<Player>> GetLeaderboardAsync();
+    Task DeletePlayerAsync(Player player);
 }
