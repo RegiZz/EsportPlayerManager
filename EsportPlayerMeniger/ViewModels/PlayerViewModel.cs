@@ -90,7 +90,7 @@ public partial class PlayerViewModel : ViewModelBase
             StressLevel = 0,
             FatigueLevel = 0,
             RankingPoints = 0,
-            Money = 1000
+            Money = 1069
         };
 
         await _playerService.AddPlayerAsync(newPlayer);

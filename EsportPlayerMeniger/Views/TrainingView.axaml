@@ -18,7 +18,7 @@
         </Border>
 
         <!-- Training List -->
-        <Border Grid.Row="1" Grid.Column="0" Margin="20" Padding="15" Background="#FFF9E6" CornerRadius="8">
+        <Border Grid.Row="1" Grid.Column="0" Margin="20" Padding="15" Background="#484848" CornerRadius="8">
             <StackPanel>
                 <TextBlock Text="💪 Dostępne Treningi" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
 
@@ -68,7 +68,7 @@
         </Border>
 
         <!-- Players List -->
-        <Border Grid.Row="1" Grid.Column="1" Margin="20" Padding="15" Background="#E6F9EC" CornerRadius="8">
+        <Border Grid.Row="1" Grid.Column="1" Margin="20" Padding="15" Background="#74354665" CornerRadius="8">
             <StackPanel>
                 <TextBlock Text="🧑‍💻 Wybierz Gracza" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
 

@@ -56,7 +56,7 @@
         </Border>
 
         <!-- Players List -->
-        <Border Grid.Row="1" Grid.Column="1" Margin="20" Padding="15" Background="DimGray" CornerRadius="8">
+        <Border Grid.Row="1" Grid.Column="1" Margin="20" Padding="15" Background="#434343" CornerRadius="8">
             <StackPanel>
                 <TextBlock Text="🧑‍💻 Wybierz Gracza" 
                            FontSize="18" 
