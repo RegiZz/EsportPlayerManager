@@ -30,6 +30,15 @@ public partial class TrainingViewModel : ViewModelBase
     [ObservableProperty]
     private string trainingMessage = string.Empty;
 
+    [ObservableProperty]
+    private int entryFee;
+    
+    [ObservableProperty] 
+    private int minSkillLevel;
+    
+    [ObservableProperty] 
+    private int fatigueLevel;
+
     public TrainingViewModel(ITrainingService trainingService, IPlayerService playerService)
     {
         _trainingService = trainingService;

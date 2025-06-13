@@ -16,6 +16,13 @@ public class PlayerService : IPlayerService
 
     public PlayerService(AppDbContext context) => _context = context;
 
+    public List<Player> GetPlayersList()
+    {
+        var allPlayers =  _context.Players.ToList();
+        
+        return allPlayers;
+    }
+
     public async Task<List<Player>> GetAllPlayersAsync() =>
         await _context.Players.ToListAsync();
 

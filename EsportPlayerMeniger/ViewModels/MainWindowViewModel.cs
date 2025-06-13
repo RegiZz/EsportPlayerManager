@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using System;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using EsportPlayerMeniger.Services;
 using EsportPlayerMeniger.Data;
@@ -28,6 +29,7 @@ public partial class MainWindowViewModel : ViewModelBase
         TrainingViewModel = new TrainingViewModel(trainingService, playerService);
         
         currentView = PlayerViewModel;
+        
 
         // Initialize database
         InitializeDatabaseAsync();
@@ -37,6 +39,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         using var context = new AppDbContext();
         await DatabaseSeeder.SeedAsync(context);
+        
     }
 
     [RelayCommand]

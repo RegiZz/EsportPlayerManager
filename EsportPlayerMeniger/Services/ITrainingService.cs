@@ -9,6 +9,7 @@ public interface ITrainingService
     Task<List<Training>> GetAllTrainingsAsync();
     Task<Training?> GetTrainingByIdAsync(int id);
     Task AddTrainingAsync(Training training);
+    Task DeleteTrainingAsync(Training training);
     Task<bool> CanPlayerTrain(Player player);
-    Task TrainPlayer(Player player, Training training);
+    Task<TrainingResult> TrainPlayer(Player player, Training training);
 }

@@ -33,7 +33,7 @@
                          Background="Transparent"
                          Padding="0"
                          ScrollViewer.VerticalScrollBarVisibility="Auto"
-                         Height="200">
+                         Height="250">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border BorderBrush="#DDE0E4" 

@@ -33,13 +33,12 @@ public partial class PlayerViewModel : ViewModelBase
 
     public PlayerViewModel(IPlayerService playerService)
     {
+        _ = LoadPlayersAsync();
         _playerService = playerService;
-        LoadPlayersAsync();
-        LoadLeaderboardAsync();
     }
 
     [RelayCommand]
-    private async Task LoadPlayersAsync()
+    public async Task LoadPlayersAsync()
     {
         var playerList = await _playerService.GetAllPlayersAsync();
         Players.Clear();
